@@ -1,0 +1,52 @@
+apply plugin: 'java'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.21'
+    compile files("$projectDir/openfire/lib/openfire.jar")
+    testCompile 'junit:junit:4.12'
+}
+
+task pluginJar(type: Zip, dependsOn: build) {
+    baseName = 'example'
+    archiveName = "${baseName}.jar"
+
+    into('') {
+        from "${projectDir}/src/${sourceSets.main.name}/plugin.xml"
+        from "${projectDir}/src/${sourceSets.main.name}/readme.html"
+        from "${projectDir}/src/${sourceSets.main.name}/changelog.html"
+        from "${projectDir}/src/${sourceSets.main.name}/logo_small.png"
+        from "${projectDir}/src/${sourceSets.main.name}/logo_large.png"
+    }
+
+    into('classes') {
+        from sourceSets.main.output.classesDir
+    }
+
+    into('database') {
+        from "${projectDir}/src/${sourceSets.main.name}/database/**/*"
+    }
+
+    into('i18n') {
+        from "${projectDir}/src/${sourceSets.main.name}/i18n/**/*"
+    }
+
+    into('lib') {
+        from configurations.runtime
+        exclude 'openfire.jar'
+    }
+
+    into('web') {
+        from "${projectDir}/src/${sourceSets.main.name}/web/**/*"
+    }
+}
+
+task deployPlugin(type: Copy, dependsOn: pluginJar) {
+    def openfireHome = "$projectDir/openfire"
+    from project.distsDir
+    into "$openfireHome/plugins"
+    include '**/*.jar'
+}

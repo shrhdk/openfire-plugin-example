@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+    <!-- Main plugin class -->
+    <class>io.github.shrhdk.ExamplePlugin</class>
+
+    <!-- Plugin meta-data -->
+    <name>Example Plugin</name>
+    <description>This is an example plugin.</description>
+    <author>Hideki Shiro</author>
+
+    <version>1.0</version>
+    <date>11/13/2016</date>
+    <url>http://github.com/shrhdk/openfire-plugin-example</url>
+    <minServerVersion>3.0.0</minServerVersion>
+    <licenseType>MIT</licenseType>
+
+    <!-- Admin console entries -->
+    <adminconsole>
+        <!-- More on this below -->
+    </adminconsole>
+</plugin>
