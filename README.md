@@ -74,4 +74,4 @@ ExampleComponent initialzie, JID: example.localhost
 </iq>
 ```
 
-(** Set up the openfire from admin console (http://localhost:9090) at the firsttime. **)
+(**Set up the openfire from admin console (http://localhost:9090) at the firsttime.**)
